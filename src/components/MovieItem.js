@@ -27,8 +27,9 @@ class MovieItem extends React.Component {
   render() {
     const { movie } = this.props;
     return (
-      <div className="card " style={{ width: "18rem" }}>
+      <div className="card mb-4" style={{ width: "300px", height: "300px" }}>
         <img
+          style={{ width: "300px", height: "165px" }}
           className="card-img-top"
           src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path ||
             movie.poster_path}`}
@@ -54,5 +55,6 @@ class MovieItem extends React.Component {
     );
   }
 }
+
 
 export default MovieItem;
