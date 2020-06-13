@@ -19,13 +19,14 @@ class MovieItem extends React.Component {
 
   handleMovieForWatchList() {
     this.state.willWatch
-      ? this.props.RemoveMovieFromWillWatch(this.props.movie)
-      : this.props.AddMovieToWillWatch(this.props.movie);
+      ? this.props.removeMovieFromWillWatch(this.props.movie)
+      : this.props.addMovieToWillWatch(this.props.movie);
     this.setState({ willWatch: !this.state.willWatch });
   }
 
   render() {
-    const { movie } = this.props;
+    let { movie, history } = this.props;
+
     return (
       <div className="card mb-4" style={{ width: "300px", height: "300px" }}>
         <img
@@ -36,7 +37,9 @@ class MovieItem extends React.Component {
           alt={movie.title}
         />
         <div className="card-body">
-          <h5 className="card-title">{movie.title}</h5>
+          <div onClick={() => history.push(`/${movie.id}`)}>
+            <h5 className="card-title">{movie.title}</h5>
+          </div>
         </div>
 
         <div className="card-footer bg-0">
@@ -55,6 +58,5 @@ class MovieItem extends React.Component {
     );
   }
 }
-
 
 export default MovieItem;

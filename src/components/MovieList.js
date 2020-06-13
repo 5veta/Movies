@@ -4,8 +4,9 @@ import MovieItem from "./MovieItem";
 const MovieList = props => {
   const {
     movieslist,
-    AddMovieToWillWatch = f => f,
-    RemoveMovieFromWillWatch = f => f
+    addMovieToWillWatch = f => f,
+    removeMovieFromWillWatch = f => f,
+    history
   } = props;
   return (
     <div className="row">
@@ -13,8 +14,9 @@ const MovieList = props => {
         <div className=" col-3" key={item.id}>
           <MovieItem
             movie={item}
-            AddMovieToWillWatch={AddMovieToWillWatch}
-            RemoveMovieFromWillWatch={RemoveMovieFromWillWatch}
+            addMovieToWillWatch={addMovieToWillWatch}
+            removeMovieFromWillWatch={removeMovieFromWillWatch}
+            history={history}
           />
         </div>
       ))}

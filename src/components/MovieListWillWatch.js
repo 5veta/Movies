@@ -1,6 +1,12 @@
 import React from "react";
 
-const MovieListWillWatch = ({ wishlist }) => {
+const MovieListWillWatch = ({ wishlist, removeMovieFromWillWatch }) => {
+  const handlerRemoveMovieFromWillWatch = movie => {
+    console.log("hello");
+    removeMovieFromWillWatch(movie);
+    console.log(movie);
+  };
+
   return (
     <div className="">
       <h5>Will Watch {wishlist.length}</h5>
@@ -14,6 +20,12 @@ const MovieListWillWatch = ({ wishlist }) => {
                 <div className="d-flex justify-content-between">
                   <div className="">{movie.title}</div>
                   <div className="">{movie.vote_average}</div>
+                  <div
+                    className=""
+                    onClick={() => handlerRemoveMovieFromWillWatch(movie)}
+                  >
+                    x
+                  </div>
                 </div>
               </li>
             ))
