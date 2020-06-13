@@ -110,29 +110,35 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="d-flex justify-content-center flex-row mb-3">
-        <div className="p-2 w-75">
-          <div className="mb-4">
+      <div className="mt-3">
+        <div className="d-flex justify-content-center flex-row">
+          <div className="mb-4 col-md-10">
             <Pagination pages={this.state.pages} updatePage={this.updatePage} />
           </div>
-          <div className="mb-4">
+        </div>
+        <div className="d-flex justify-content-center flex-row">
+          <div className="mb-4 col-10">
             <MovieTabs
               sort_by={this.state.sort_by}
               updateSortBy={this.updateSortBy}
             />
           </div>
-          <MovieList
-            movieslist={this.state.movies}
-            addMovieToWillWatch={this.addMovieToWillWatch}
-            removeMovieFromWillWatch={this.removeMovieFromWillWatch}
-            history={this.props.history}
-          />
         </div>
-        <div className="p-2">
-          <MovieListWillWatch
-            wishlist={this.state.moviesWillWatch}
-            removeMovieFromWillWatch={this.removeMovieFromWillWatch}
-          />
+        <div className="d-flex justify-content-center flex-row">
+          <div className="col-8 mr-2">
+            <MovieList
+              movieslist={this.state.movies}
+              addMovieToWillWatch={this.addMovieToWillWatch}
+              removeMovieFromWillWatch={this.removeMovieFromWillWatch}
+              history={this.props.history}
+            />
+          </div>
+          <div className="px-2 col-2">
+            <MovieListWillWatch
+              wishlist={this.state.moviesWillWatch}
+              removeMovieFromWillWatch={this.removeMovieFromWillWatch}
+            />
+          </div>
         </div>
       </div>
     );

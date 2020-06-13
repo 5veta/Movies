@@ -9,7 +9,7 @@ const MovieListWillWatch = ({ wishlist, removeMovieFromWillWatch }) => {
 
   return (
     <div className="">
-      <h5>Will Watch {wishlist.length}</h5>
+      <h2>Will Watch {wishlist.length}</h2>
       <ul className="list-group">
         {wishlist.length > 0
           ? wishlist.map((movie, i) => (
