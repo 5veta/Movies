@@ -3,12 +3,14 @@ import classNames from "classnames";
 
 const Pagination = props => {
   const { page, min, max, range, firstpage } = props.pages;
-  let arr = [];
-  //console.log(props.pages);
 
-  for (let i = firstpage; i < firstpage + range; i++) {
-    arr.push(i);
-  }
+  const getPageList = () => {
+    let arr = [];
+    for (let i = firstpage; i < firstpage + range; i++) {
+      arr.push(i);
+    }
+    return arr;
+  };
 
   const getPage = value => {
     if (value > max) {
@@ -53,7 +55,7 @@ const Pagination = props => {
               <div className="page-link">...</div>
             </li>
           ) : null}
-          {arr
+          {getPageList()
             .filter(fv => fv < max)
             .map((v, i) => (
               <li className={hendlerClassValue(v)} key={v}>
