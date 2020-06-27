@@ -10,24 +10,27 @@ const Pagination = props => {
     arr.push(i);
   }
 
-  const hendlerClick = value => () => {
+  const getPage = value => {
     if (value > max) {
-      value = max;
+      return max;
     } else if (value < min) {
-      value = min;
+      return min;
     }
+    return value;
+  };
 
-    props.updatePage(value);
+  const hendlerClick = value => () => {
+    const page = getPage(value);
+    props.updatePage(page);
   };
 
   const hendlerClassValue = value => {
     return classNames({
       "page-item active": page === value,
-      "page-item": page !== value && value !== "next" && value !== "prev",
-      "page-item disabled": value === "prev" && page === 1,
-      "page-item m-0": value === "prev" && page > 1,
-      "page-item disabled m-0": value === "next" && page === max,
-      "page-item mb-0": value === "next" && page < max
+      "page-item": page !== value,
+      "page-item disabled":
+        (value === "next" && page === max && page !== 1) ||
+        (value === "prev" && page === 1 && page !== max)
     });
   };
 

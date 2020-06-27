@@ -89,9 +89,9 @@ class Home extends React.Component {
         first = max - range > min + 1 ? max - range : 0;
       } else {
         if (value > firstpage) {
-          first = firstpage + range <= value ? firstpage + 9 : 0;
+          first = firstpage + range <= value ? firstpage + range : 0;
         } else if (value < firstpage) {
-          first = firstpage - 9;
+          first = firstpage - range;
         } else {
           first = 0;
         }
