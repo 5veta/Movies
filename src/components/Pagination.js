@@ -2,14 +2,34 @@ import React from "react";
 import classNames from "classnames";
 
 const Pagination = props => {
-  const { page, min, max, range, firstpage } = props.pages;
+  const { page, max } = props.pages;
+  const min = 1,
+    range = 9;
+
+  const patsOfPagination = () => {
+    let rest = max % range;
+    let int = parseInt(max / range - rest, 10);
+    return rest ? int + rest : int;
+  };
 
   const getPageList = () => {
-    let arr = [];
-    for (let i = firstpage; i < firstpage + range; i++) {
-      arr.push(i);
+    let list = [];
+    let p = 2;
+    let size = patsOfPagination();
+
+    for (let i = 0; i <= size; i++) {
+      let arr = [];
+      for (let y = 0; y < range; y++) {
+        arr.push(p);
+        if ((page < arr[0] + range && page >= arr[0]) || page === 1) {
+          list.push(p);
+        }
+        p++;
+      }
+      if (list.length) {
+        return list;
+      }
     }
-    return arr;
   };
 
   const getPage = value => {
@@ -50,7 +70,7 @@ const Pagination = props => {
               1
             </div>
           </li>
-          {firstpage > 2 ? (
+          {page > range + 1 ? (
             <li className="page-item">
               <div className="page-link">...</div>
             </li>
@@ -65,7 +85,7 @@ const Pagination = props => {
               </li>
             ))}
 
-          {firstpage + range < max ? (
+          {page + range < max ? (
             <li className="page-item">
               <div className="page-link">...</div>
             </li>

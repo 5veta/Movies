@@ -14,10 +14,7 @@ class Home extends React.Component {
       sort_by: "popularity.desc",
       pages: {
         page: 1,
-        firstpage: 2,
-        min: 1,
-        max: 1,
-        range: 9
+        max: 1
       }
     };
     this.addMovieToWillWatch = this.addMovieToWillWatch.bind(this);
@@ -80,29 +77,9 @@ class Home extends React.Component {
   };
 
   updatePage = value => {
-    let first;
-    let { min, max, range, firstpage } = this.state.pages;
-    if (value >= min && value <= max && min !== max) {
-      if (value === min) {
-        first = min + 1;
-      } else if (value === max) {
-        first = max - range > min + 1 ? max - range : 0;
-      } else {
-        if (value > firstpage) {
-          first = firstpage + range <= value ? firstpage + range : 0;
-        } else if (value < firstpage) {
-          first = firstpage - range;
-        } else {
-          first = 0;
-        }
-      }
-    }
-    //console.log("first", first);
-    first
-      ? this.setState({
-          pages: { ...this.state.pages, firstpage: first, page: value }
-        })
-      : this.setState({ pages: { ...this.state.pages, page: value } });
+    this.setState({
+      pages: { ...this.state.pages, page: value }
+    });
   };
 
   render() {
