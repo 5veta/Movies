@@ -3,8 +3,8 @@ import classNames from "classnames";
 
 const Pagination = props => {
   const { page, max } = props.pages;
-  const min = 1,
-    range = 9;
+  const min = 1;
+  const range = 9;
 
   const patsOfPagination = () => {
     let rest = max % range;
@@ -14,17 +14,17 @@ const Pagination = props => {
 
   const getPageList = () => {
     let list = [];
-    let p = 2;
+    let item = 2;
+    let first;
     let size = patsOfPagination();
 
     for (let i = 0; i <= size; i++) {
-      let arr = [];
       for (let y = 0; y < range; y++) {
-        arr.push(p);
-        if ((page < arr[0] + range && page >= arr[0]) || page === 1) {
-          list.push(p);
+        if (y === 0) first = item;
+        if ((page < first + range && page >= first) || page === 1) {
+          list.push(item);
         }
-        p++;
+        item++;
       }
       if (list.length) {
         return list;
