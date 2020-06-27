@@ -2,6 +2,12 @@ import React from "react";
 import classNames from "classnames";
 
 class MovieTabs extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+    this.getClassLink = this.getClassLink.bind(this);
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps.sort_by !== this.props.sort_by) {
       return true;
@@ -9,69 +15,46 @@ class MovieTabs extends React.Component {
     return false;
   }
 
+  handleClick = event => {
+    let sortby = this.props.updateSortBy(
+      event.target.innerHTML.toLowerCase().replace(/\s/, ".")
+    );
+    event.target.innerHTML = sortby.replace(/\./, " ");
+  };
+
+  getClassLink = value => {
+    let sort = this.props.sort_by.split(".");
+    return classNames({
+      "btn btn-light mr-2 active": sort[0] === value,
+      "btn btn-light mr-2": sort[0] !== value
+    });
+  };
+
   render() {
-    //console.log("this.props.sort_by: " + this.props.sort_by);
-    const { sort_by, updateSortBy } = this.props;
-    let sort_arr = sort_by.split(".");
-
-    const handleClick = event => {
-      updateSortBy(event.target.value);
-    };
-
-    const getSortValue = value => {
-      return sort_arr[0] === `${value}`
-        ? sort_arr[1] === "asc"
-          ? `${value}.asc`
-          : `${value}.desc`
-        : `${value}.desc`;
-    };
-
-    const getClassLink = value => {
-      let sort = this.props.sort_by.replace(/^(\w+)\.(\w+)$/, "$1");
-      //console.log("sort..." + sort);
-      return classNames({
-        "btn btn-light mr-2 active": sort === value,
-        "btn btn-light mr-2": sort !== value
-      });
-    };
-
-    const getTextValue = value => {
-      let reg = new RegExp(value, "i");
-      let val = value.split("_").join(" ");
-      return reg.test(sort_arr[0])
-        ? sort_arr[1] === "desc"
-          ? `${val} desc`
-          : `${val} asc`
-        : `${val} desc`;
-    };
-
     return (
       <ul className="tabs nav nav-pills">
         <li className="nav-item">
           <button
-            className={getClassLink("popularity")}
-            onClick={handleClick}
-            value={getSortValue("popularity")}
+            className={this.getClassLink("popularity")}
+            onClick={this.handleClick}
           >
-            {getTextValue("Popularity")}
+            popularity desc
           </button>
         </li>
         <li className="nav-item">
           <button
-            className={getClassLink("revenue")}
-            onClick={handleClick}
-            value={getSortValue("revenue")}
+            className={this.getClassLink("revenue")}
+            onClick={this.handleClick}
           >
-            {getTextValue("Revenue")}
+            revenue desc
           </button>
         </li>
         <li className="nav-item">
           <button
-            className={getClassLink("vote_average")}
-            onClick={handleClick}
-            value={getSortValue("vote_average")}
+            className={this.getClassLink("vote_average")}
+            onClick={this.handleClick}
           >
-            {getTextValue("Vote_average")}
+            votes desc
           </button>
         </li>
       </ul>

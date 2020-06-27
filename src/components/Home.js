@@ -72,14 +72,11 @@ class Home extends React.Component {
   }
 
   updateSortBy = value => {
-    let sort_arr = this.state.sort_by.split(".");
     let val_arr = value.split(".");
-    let vl = value;
+    let vl = val_arr[1] === "desc" ? `${val_arr[0]}.asc` : `${val_arr[0]}.desc`;
 
-    if (sort_arr[0] === val_arr[0]) {
-      vl = val_arr[1] === "desc" ? `${val_arr[0]}.asc` : `${val_arr[0]}.desc`;
-    }
     this.setState({ sort_by: vl });
+    return vl;
   };
 
   updatePage = value => {
